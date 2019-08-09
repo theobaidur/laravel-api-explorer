@@ -46,12 +46,13 @@ export default class ResponseDisplayer extends React.Component {
     }
 
     render() {
-        const { info } = this.props
+        const { info } = this.props;
+        const valid_json_headers = ["application/json", "application/vnd.api+json"]
         return (
             <div className={`card p-3 ${wrapperClass}`}>
                 <h3>Response</h3>
 
-                {info.headers["content-type"] === "application/json" ? (
+                { valid_json_headers.indexOf((info.headers["content-type"] || '').toLowerCase()) > -1 ? (
                     <JsonEditor
                         ref={this.jsonEditorRef}
                         enableEdit={false}
